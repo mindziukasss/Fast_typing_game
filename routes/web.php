@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', ['as' => 'app.fastTyping.index', 'uses' => 'Gm_fastTypingController@index']);
+
+});
+
+
