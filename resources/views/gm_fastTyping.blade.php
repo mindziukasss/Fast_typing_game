@@ -49,6 +49,9 @@
 
     <div id="gameOver" class="hidden">
         <h2>GAME OVER!!!</h2>
+        <h4>Name:<span id="gamers"></span></h4>
+        <h4>Score:<span id="scores"></span></h4>
+        <button class="btn btn-primary">Go to list</button>
     </div>
 
 
@@ -59,6 +62,9 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 <script src="js/fastTyping.js"></script>
-<script> new Fast_Typing()</script>
+<script> var game = new Fast_Typing()
+    game.setSaveURL("{{route('app.fastTyping.store')}}");
+</script>
+
 
 </html>

@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', ['as' => 'app.fastTyping.index', 'uses' => 'Gm_fastTypingController@index']);
-
+    Route::post('/create', ['as' => 'app.fastTyping.store','uses' => 'Gm_fastTypingController@store']);
 });
 
 

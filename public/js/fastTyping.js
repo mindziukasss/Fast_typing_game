@@ -8,6 +8,11 @@ var Fast_Typing = function () {
     var last_state;
     var level;
     var score;
+    var saveULR;
+
+    this.setSaveURL = function (value) {
+        saveULR = value;
+    };
     /*--------------Register -----------------------------------------------------------------------------------------------*/
     var Register_Logics = function () {
 
@@ -90,7 +95,7 @@ var Fast_Typing = function () {
         var timeOut;
         var letterKey;
         var letter_show = $('#point');
-        var gamer =$('#gamer')
+        var gamer = $('#gamer');
         var livesCount;
         var userInput = true;
         var is_GoldenLetter;
@@ -124,10 +129,10 @@ var Fast_Typing = function () {
             if (is_GoldenLetter) {
 
                 is_GoldenLetter = false;
-                for (var i = 0 ; i < 5 ; i++){
+                for (var i = 0; i < 5; i++) {
                     updateScore();
                 }
-            }else{
+            } else {
                 score += 1;
             }
 
@@ -146,7 +151,7 @@ var Fast_Typing = function () {
         }
 
         function enable() {
-
+            saveData();
             $(window).keydown(
                 function () {
                     letter_show.addClass('active')
@@ -170,7 +175,7 @@ var Fast_Typing = function () {
 
         function setTime() {
 
-            amount = (letter_click - letter_show_now)*0.001;
+            amount = (letter_click - letter_show_now) * 0.001;
             $('#second').html(parseFloat(amount).toFixed(2));
         }
 
@@ -194,14 +199,30 @@ var Fast_Typing = function () {
             }
 
 
-
-
-
             userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
             letter_show_now = Date.now();
             timeOut = setTimeout(change_letter, level * 1000);
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function saveData() {
+
+            $.ajax({
+                url: saveULR,
+                method: "POST",
+                data: {
+                    name: name,
+                    level: level,
+                    score: score
+                }
+            });
         }
 
         function disable() {
@@ -213,13 +234,18 @@ var Fast_Typing = function () {
 
     var game = new Game_Logic();
 
-
     /*-----------------------gameOver   --------------------------------------------------------------------------------------------*/
     var Game_Logic_Over = function () {
+        var gamers = $('#gamer');
+        var scores = $('#score');
+
         var view = $('#gameOver');
 
         this.show = function () {
-            view.removeClass('hidden').append('<p>' + name + score + '</p>');
+            view.removeClass('hidden');
+            gamers.html(name);
+            scores.html(score);
+            console.log(name, score);
             // enable();
 
         };
