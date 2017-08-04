@@ -19,6 +19,16 @@ class Gm_fastTypingController extends Controller
         return view('gm_fastTyping');
     }
 
+
+    public function statistic()
+    {
+        $config['level7'] = Gm_fastTypingModel::where('level', '7')->orderBy('score', 'desc')->get()->toArray();
+        $config['level4'] = Gm_fastTypingModel::where('level', '4')->orderBy('score', 'desc')->get()->toArray();
+        $config['level2'] = Gm_fastTypingModel::where('level', '2')->orderBy('score', 'desc')->get()->toArray();
+
+        return view('statistic', $config);
+    }
+
     /**
      * Show the form for creating a new resource.
      * GET /gm_fasttyping/create
