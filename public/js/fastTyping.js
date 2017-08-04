@@ -12,12 +12,17 @@ var Fast_Typing = function () {
     var start_time;
     var end_time;
     var game_time;
+    var total_speed;
+    var keyUpCount;
 
     this.setSaveURL = function (value) {
         saveULR = value;
     };
     /*--------------Register -----------------------------------------------------------------------------------------------*/
     var Register_Logics = function () {
+
+        keyUpCount = 0;
+        total_speed = 0;
 
         var view = $('#register');
 
@@ -103,7 +108,7 @@ var Fast_Typing = function () {
         var livesCount;
         var userInput = true;
         var is_GoldenLetter;
-
+        var timeAmount;
 
         var letter_show_now;
         var letter_click;
@@ -169,6 +174,7 @@ var Fast_Typing = function () {
                     letter_show.removeClass('active')
                     if (e.key === letters[letterKey]) {
                         updateScore()
+                        count_speed()
                     } else {
                         removeLive()
                     }
@@ -191,6 +197,17 @@ var Fast_Typing = function () {
 
             game_time = (end_time - start_time) * 0.001;
             game_time = game_time.toString();
+        }
+
+
+        function count_speed() {
+            timeAmount = Date.now() - letter_show_now;
+            total_speed += timeAmount;
+            keyUpCount++;
+
+            //game now show this line need
+            // $('#time-amount').html(parseFloat(timeAmount * 0.001).toFixed(2));
+
         }
 
 
@@ -240,7 +257,7 @@ var Fast_Typing = function () {
             view.removeClass('hidden');
             gamers.html(name);
             scores.html(score);
-            enable();
+            saveData();
 
         };
         this.hide = function () {
@@ -248,25 +265,20 @@ var Fast_Typing = function () {
             // disable();
         };
 
-        function enable() {
-            saveData()
+        function saveData() {
 
-            function saveData() {
-
-                $.ajax({
-                    url: saveULR,
-                    method: "POST",
-                    data: {
-                        name: name,
-                        level: level,
-                        score: score,
-                        game_time: game_time
-                    }
-                });
-            }
-
+            $.ajax({
+                url: saveULR,
+                method: "POST",
+                data: {
+                    name: name,
+                    level: level,
+                    score: score,
+                    game_time: game_time,
+                    average_speed: (parseFloat((total_speed/ keyUpCount) * 0.001 ).toFixed(2))
+                }
+            });
         }
-
 
     };
 
@@ -294,7 +306,6 @@ var Fast_Typing = function () {
         }
         last_state.show();
     }
-
     change_State(STATE_REGISTER);
 
 }
