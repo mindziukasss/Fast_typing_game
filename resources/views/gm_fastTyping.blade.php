@@ -23,9 +23,9 @@
     </div>
     <div id="level" class="hidden">
         <h2>Select level</h2>
-        <input type="radio" name="play" value="900" checked><label>Easy</label>
-        <input type="radio" name="play" value="6"><label>Normal</label>
-        <input type="radio" name="play" value="3"><label>Hard</label>
+        <input type="radio" name="play" value="7" checked><label>Easy</label>
+        <input type="radio" name="play" value="4"><label>Normal</label>
+        <input type="radio" name="play" value="2"><label>Hard</label>
         <button id="play" class="btn btn-success">Go play!</button>
     </div>
     <div id="game" class="hidden">
@@ -51,7 +51,7 @@
         <h2>GAME OVER!!!</h2>
         <h4>Name:<span id="gamers"></span></h4>
         <h4>Score:<span id="scores"></span></h4>
-        <button class="btn btn-primary">Go to list</button>
+        <a href='{{ route('app.fastTyping.statistic') }}'><button class="btn btn-primary" >Statistic</button></a>
     </div>
 
 
