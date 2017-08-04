@@ -8,5 +8,5 @@ class Gm_fastTypingModel extends Gm_fastTypingBaseModel {
 
     protected $fillable = ['id', 'name', 'score', 'game_time', 'average_speed', 'level'];
 
-
+    protected $hidden = ['count', 'id', 'deleted_at','created_at', 'updated_at'];
 }
