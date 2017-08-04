@@ -9,6 +9,9 @@ var Fast_Typing = function () {
     var level;
     var score;
     var saveULR;
+    var start_time;
+    var end_time;
+    var game_time;
 
     this.setSaveURL = function (value) {
         saveULR = value;
@@ -75,6 +78,7 @@ var Fast_Typing = function () {
         $(function () {
             play.click(function () {
                 level = $('input[name = play]:checked').val();
+                start_time = Date.now();
                 change_State(STATE_GAME);
             })
         });
@@ -100,6 +104,7 @@ var Fast_Typing = function () {
         var userInput = true;
         var is_GoldenLetter;
 
+
         var letter_show_now;
         var letter_click;
         var amount;
@@ -112,6 +117,7 @@ var Fast_Typing = function () {
             score = 0;
             change_letter();
             enable();
+
 
         };
         this.hide = function () {
@@ -145,13 +151,15 @@ var Fast_Typing = function () {
             $('#live').html(livesCount);
 
 
-            if (livesCount <= 0)
+            if (livesCount === 0) {
+                end_time = Date.now();
+                games_time();
                 change_State(STATE_GAMEOVER);
-
+            }
         }
 
         function enable() {
-            saveData();
+
             $(window).keydown(
                 function () {
                     letter_show.addClass('active')
@@ -179,6 +187,13 @@ var Fast_Typing = function () {
             $('#second').html(parseFloat(amount).toFixed(2));
         }
 
+        function games_time() {
+
+            game_time = (end_time - start_time) * 0.001;
+            game_time = game_time.toString();
+        }
+
+
         function change_letter() {
 
 
@@ -198,31 +213,11 @@ var Fast_Typing = function () {
                 letter_show.removeClass('golden');
             }
 
-
             userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
             letter_show_now = Date.now();
             timeOut = setTimeout(change_letter, level * 1000);
-        }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        function saveData() {
-
-            $.ajax({
-                url: saveULR,
-                method: "POST",
-                data: {
-                    name: name,
-                    level: level,
-                    score: score
-                }
-            });
         }
 
         function disable() {
@@ -245,8 +240,7 @@ var Fast_Typing = function () {
             view.removeClass('hidden');
             gamers.html(name);
             scores.html(score);
-            console.log(name, score);
-            // enable();
+            enable();
 
         };
         this.hide = function () {
@@ -254,9 +248,25 @@ var Fast_Typing = function () {
             // disable();
         };
 
-        // function disable() {
-        //
-        // }
+        function enable() {
+            saveData()
+
+            function saveData() {
+
+                $.ajax({
+                    url: saveULR,
+                    method: "POST",
+                    data: {
+                        name: name,
+                        level: level,
+                        score: score,
+                        game_time: game_time
+                    }
+                });
+            }
+
+        }
+
 
     };
 

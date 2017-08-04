@@ -44,7 +44,7 @@ class Gm_fastTypingController extends Controller
             'name' => $data['name'],
             'level' => $data['level'],
             'score' => $data['score'],
-//            'game_time' => $data['game_time'],
+            'game_time' => $data['game_time'],
 //            'average_speed' => $data['average_speed'],
 
 
