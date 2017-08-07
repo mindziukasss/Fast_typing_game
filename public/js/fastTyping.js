@@ -241,21 +241,21 @@ var Fast_Typing = function () {
             $(window).unbind();
             clearTimeout(timeOut);
         }
-
     };
 
     var game = new Game_Logic();
 
     /*-----------------------gameOver   --------------------------------------------------------------------------------------------*/
     var Game_Logic_Over = function () {
-        var gamers = $('#gamer');
-        var scores = $('#score');
+        var gamer = $('#gamers');
+        var scores = $('#scores');
+        var newGame = $('#newGame');
 
         var view = $('#gameOver');
 
         this.show = function () {
             view.removeClass('hidden');
-            gamers.html(name);
+            gamer.html(name);
             scores.html(score);
             saveData();
 
@@ -264,6 +264,11 @@ var Fast_Typing = function () {
             view.addClass('hidden');
             // disable();
         };
+
+        newGame.click(function () {
+           change_State(STATE_REGISTER);
+        });
+        
 
         function saveData() {
 

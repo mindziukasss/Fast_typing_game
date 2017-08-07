@@ -49,8 +49,9 @@
 
     <div id="gameOver" class="hidden">
         <h2>GAME OVER!!!</h2>
-        <h4>Name:<span id="gamers"></span></h4>
-        <h4>Score:<span id="scores"></span></h4>
+        <h4>Name: <span id="gamers"></span></h4>
+        <h4>Score: <span id="scores"></span></h4>
+        <button id="newGame" class="btn btn-success">New game</button>
         <a href='{{ route('app.fastTyping.statistic') }}'><button class="btn btn-primary" >Statistic</button></a>
     </div>
 
