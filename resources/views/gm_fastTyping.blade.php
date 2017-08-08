@@ -22,6 +22,7 @@
         <button id="go" class="btn btn-primary">Register to game</button>
     </div>
     <div id="level" class="hidden">
+        <h4> Player name: <span id="gamerName"></span></h4>
         <h2>Select level</h2>
         <input type="radio" name="play" value="7" checked><label>Easy</label>
         <input type="radio" name="play" value="4"><label>Normal</label>

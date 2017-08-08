@@ -70,10 +70,12 @@ var Fast_Typing = function () {
     var Level_Select_logic = function () {
         var view = $('#level');
         var play = $('#play');
+        var gamerName = $('#gamerName');
+
 
         this.show = function () {
-            view.removeClass('hidden').prepend('<h2>' + 'Player name:' + name + '</h2>');
-
+            view.removeClass('hidden');
+            gamerName.html(name);
         };
         this.hide = function () {
             view.addClass('hidden');
@@ -259,32 +261,34 @@ var Fast_Typing = function () {
             scores.html(score);
             saveData();
 
+            function saveData() {
+
+                $.ajax({
+                    url: saveULR,
+                    method: "POST",
+                    data: {
+                        name: name,
+                        level: level,
+                        score: score,
+                        game_time: game_time,
+                        average_speed: (parseFloat((total_speed / keyUpCount) * 0.001).toFixed(2))
+                    }
+                });
+            }
+
         };
         this.hide = function () {
             view.addClass('hidden');
-            // disable();
+            disable();
         };
 
         newGame.click(function () {
-           change_State(STATE_REGISTER);
+            change_State(STATE_REGISTER);
         });
-        
 
-        function saveData() {
-
-            $.ajax({
-                url: saveULR,
-                method: "POST",
-                data: {
-                    name: name,
-                    level: level,
-                    score: score,
-                    game_time: game_time,
-                    average_speed: (parseFloat((total_speed/ keyUpCount) * 0.001 ).toFixed(2))
-                }
-            });
+        function disable() {
+            $(window).unbind();
         }
-
     };
 
     var game_over = new Game_Logic_Over();
@@ -311,6 +315,7 @@ var Fast_Typing = function () {
         }
         last_state.show();
     }
+
     change_State(STATE_REGISTER);
 
 }
