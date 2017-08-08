@@ -7,7 +7,7 @@ var Fast_Typing = function () {
     var name;
     var last_state;
     var level;
-    var score;
+    var score = 0;
     var saveULR;
     var start_time;
     var end_time;
@@ -76,19 +76,20 @@ var Fast_Typing = function () {
         this.show = function () {
             view.removeClass('hidden');
             gamerName.html(name);
+            enable();
         };
         this.hide = function () {
             view.addClass('hidden');
             disable();
         };
 
-        $(function () {
+        function enable() {
             play.click(function () {
                 level = $('input[name = play]:checked').val();
                 start_time = Date.now();
                 change_State(STATE_GAME);
             })
-        });
+        }
 
         function disable() {
             play.unbind();
@@ -288,6 +289,8 @@ var Fast_Typing = function () {
 
         function disable() {
             $(window).unbind();
+            gamer.unbind();
+            scores.unbind();
         }
     };
 
