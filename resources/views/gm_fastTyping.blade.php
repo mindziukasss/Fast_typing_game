@@ -44,7 +44,7 @@
             <h4>Live:<span id="live">+3</span></h4>
         </div>
         <div class="col-md-6">
-            <h5>time:<span id="second">s</span></h5>
+            <h5>time:<span id="second"></span>s</h5>
         </div>
     </div>
 
@@ -52,6 +52,7 @@
         <h2>GAME OVER!!!</h2>
         <h4>Name: <span id="gamers"></span></h4>
         <h4>Score: <span id="scores"></span></h4>
+        <h4>Game time: <span id="gameTime"></span>min.</h4>
         <button id="newGame" class="btn btn-success">New game</button>
         <a href='{{ route('app.fastTyping.statistic') }}'><button class="btn btn-primary" >Statistic</button></a>
     </div>

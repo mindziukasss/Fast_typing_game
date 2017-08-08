@@ -198,8 +198,8 @@ var Fast_Typing = function () {
 
         function games_time() {
 
-            game_time = (end_time - start_time) * 0.001;
-            game_time = game_time.toString();
+            game_time = (end_time - start_time) * 0.001/60;
+            game_time = parseFloat(game_time).toFixed(2);
         }
 
 
@@ -253,6 +253,7 @@ var Fast_Typing = function () {
         var gamer = $('#gamers');
         var scores = $('#scores');
         var newGame = $('#newGame');
+        var gameTime = $('#gameTime');
 
         var view = $('#gameOver');
 
@@ -260,6 +261,8 @@ var Fast_Typing = function () {
             view.removeClass('hidden');
             gamer.html(name);
             scores.html(score);
+            gameTime.html(game_time);
+            console.log(game_time);
             saveData();
 
             function saveData() {
