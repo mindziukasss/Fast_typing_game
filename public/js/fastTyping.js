@@ -262,7 +262,6 @@ var Fast_Typing = function () {
             gamer.html(name);
             scores.html(score);
             gameTime.html(game_time);
-            console.log(game_time);
             saveData();
 
             function saveData() {
