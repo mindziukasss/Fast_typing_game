@@ -1,11 +1,15 @@
 @extends('core')
 @section('content')
+
     <div class="box">
         <div id="register" class="hidden">
             <h2>Welcome to the game!</h2>
             <label>Please register</label>
             <input id="name" type="text" class="form-control" placeholder="Player name">
             <button id="go" class="btn btn-primary">Register to game</button>
+            <br>
+            <br>
+            <a id="link" href='{{ route('app.fastTyping.statistic') }}'>Game statistic</a>
         </div>
         <div id="level" class="hidden">
             <h4> Player name: <span id="gamerName"></span></h4>
@@ -14,6 +18,9 @@
             <input type="radio" name="play" value="4"><label>Normal</label>
             <input type="radio" name="play" value="2"><label>Hard</label>
             <button id="play" class="btn btn-success">Go play!</button>
+            <br>
+            <br>
+            <a id="link" href='{{ route('app.fastTyping.statistic') }}'>Game statistic</a>
         </div>
         <div id="game" class="hidden">
             <div class="col-md-6">
