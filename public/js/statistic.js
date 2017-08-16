@@ -11,3 +11,4 @@ function levels(event, level) {
     document.getElementById(level).style.display = "block";
     event.currentTarget.className += " active";
 }
+document.getElementById("defaultOpen").click();
