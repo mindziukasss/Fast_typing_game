@@ -69,4 +69,46 @@ body {
     margin-right: 190px;
 }
 
+#title {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+.tab {
+    text-align: center;
+}
+.tablinks {
+    width: 100px;
+}
+
+th,td {
+    color: white;
+    text-align: center;
+}
+
+.box-stat {
+    background: rgba(7, 51, 68, 0.48);
+    margin: 195px auto;
+    border: 1px solid white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 720px;
+    height: 405px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+.table {
+    width: 90%;
+    max-width: 90%;
+    margin-bottom: 20px;
+    margin: auto;
+
+}
+#link-game {
+    color: white;
+    font-size: 15px;
+    margin-left: 560px;
+}
 

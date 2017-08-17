@@ -25,7 +25,7 @@ class Gm_fastTypingController extends Controller
         $config['level7'] = Gm_fastTypingModel::where('level', '7')->orderBy('score', 'desc')->take(5)->get()->toArray();
         $config['level4'] = Gm_fastTypingModel::where('level', '4')->orderBy('score', 'desc')->take(5)->get()->toArray();
         $config['level2'] = Gm_fastTypingModel::where('level', '2')->orderBy('score', 'desc')->take(5)->get()->toArray();
-
+        $config['ignore'] = ['level'];
         return view('statistic', $config);
     }
 
